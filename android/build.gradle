@@ -97,7 +97,7 @@ allprojects {
             publishing.publications {
                 aarArchive(MavenPublication) {
                     groupId rootProject.ext.moduleGroupId
-                    artifactId 'jitsi-meet'
+                    artifactId project.name
                     version project.version
 
                     artifact("${project.buildDir}/outputs/aar/${project.name}-release.aar") {
@@ -106,8 +106,8 @@ allprojects {
                     artifact(androidSourcesJar)
                     pom.withXml {
                         def pomXml = asNode()
-                        pomXml.appendNode('name', 'jitsi-meet')
-                        pomXml.appendNode('description', 'customizes sdk for android')
+                        pomXml.appendNode('name', project.name)
+                        pomXml.appendNode('description', json.description)
                         pomXml.appendNode('url', json.homepage)
                         if (json.license) {
                             def license = pomXml.appendNode('licenses').appendNode('license')
@@ -124,7 +124,7 @@ allprojects {
                             // (third-party) React Native modules we utilize can
                             // depend not on a specific react-native release but
                             // a wider range.
-                            if (artifactId.startsWith('react-native-') && groupId.equals('jitsi-meet')) {
+                            if (artifactId == 'react-native') {
                                 def versionNumber = VersionNumber.parse(version)
                                 version = "${versionNumber.major}.${versionNumber.minor}"
                             }
