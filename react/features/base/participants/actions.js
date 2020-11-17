@@ -1,6 +1,6 @@
 import { NOTIFICATION_TIMEOUT, showNotification } from '../../notifications';
 import { set } from '../redux';
-
+// mute-unmute-XX
 import {
     DOMINANT_SPEAKER_CHANGED,
     HIDDEN_PARTICIPANT_JOINED,
@@ -8,6 +8,7 @@ import {
     GRANT_MODERATOR,
     KICK_PARTICIPANT,
     MUTE_REMOTE_PARTICIPANT,
+    UNMUTE_REMOTE_PARTICIPANT,
     PARTICIPANT_ID_CHANGED,
     PARTICIPANT_JOINED,
     PARTICIPANT_KICKED,
@@ -198,6 +199,13 @@ export function localParticipantRoleChanged(role) {
 export function muteRemoteParticipant(id) {
     return {
         type: MUTE_REMOTE_PARTICIPANT,
+        id
+    };
+}
+// mute-unmute-XX
+export function unMuteRemoteParticipant(id) {
+    return {
+        type: UNMUTE_REMOTE_PARTICIPANT,
         id
     };
 }

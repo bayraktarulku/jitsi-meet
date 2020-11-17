@@ -10,9 +10,11 @@ import {
 } from '../analytics';
 import { hideDialog } from '../base/dialog';
 import { setAudioMuted } from '../base/media';
+// mute-unmute-XX
 import {
     getLocalParticipant,
-    muteRemoteParticipant
+    muteRemoteParticipant,
+    unMuteRemoteParticipant
 } from '../base/participants';
 
 import { RemoteVideoMenu } from './components';
@@ -56,6 +58,14 @@ export function muteRemote(participantId: string) {
     return (dispatch: Dispatch<any>) => {
         sendAnalytics(createRemoteMuteConfirmedEvent(participantId));
         dispatch(muteRemoteParticipant(participantId));
+    };
+}
+
+// mute-unmute-XX
+export function unMuteRemote(participantId: string) {
+    return (dispatch: Dispatch<any>) => {
+        sendAnalytics(createRemoteMuteConfirmedEvent(participantId));
+        dispatch(unMuteRemoteParticipant(participantId));
     };
 }
 

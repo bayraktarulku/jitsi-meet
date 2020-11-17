@@ -13,12 +13,13 @@ import { JitsiConferenceEvents } from '../lib-jitsi-meet';
 import { MiddlewareRegistry, StateListenerRegistry } from '../redux';
 import { playSound, registerSound, unregisterSound } from '../sounds';
 import { getTrackByJitsiTrack, TRACK_ADDED, TRACK_REMOVED, TRACK_UPDATED } from '../tracks';
-
+// mute-unmute-XX
 import {
     DOMINANT_SPEAKER_CHANGED,
     GRANT_MODERATOR,
     KICK_PARTICIPANT,
     MUTE_REMOTE_PARTICIPANT,
+    UNMUTE_REMOTE_PARTICIPANT,
     PARTICIPANT_DISPLAY_NAME_CHANGED,
     PARTICIPANT_JOINED,
     PARTICIPANT_LEFT,
@@ -107,6 +108,13 @@ MiddlewareRegistry.register(store => next => action => {
         const { conference } = store.getState()['features/base/conference'];
 
         conference.muteParticipant(action.id);
+        break;
+    }
+
+    // mute-unmute-XX
+    case UNMUTE_REMOTE_PARTICIPANT: {
+        const { conference } = store.getState()['features/base/conference'];
+        conference.unMuteParticipant(action.id);
         break;
     }
 
